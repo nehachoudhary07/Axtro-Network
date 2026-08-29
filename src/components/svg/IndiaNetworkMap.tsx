@@ -15,49 +15,38 @@ export function IndiaNetworkMap({ selectedLocation, onSelectLocation }: IndiaNet
         xmlns="http://www.w3.org/2000/svg"
       >
         <defs>
-          <pattern id="networkMapGrid" width="40" height="40" patternUnits="userSpaceOnUse">
-            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#17263A" strokeWidth="0.5" strokeOpacity="0.4" />
-            <circle cx="0" cy="0" r="1" fill="#245FA8" fillOpacity="0.25" />
-          </pattern>
-
           <radialGradient id="nodeActiveGlow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#245FA8" stopOpacity="0.5" />
-            <stop offset="100%" stopColor="#07101C" stopOpacity="0" />
+            <stop offset="0%" stopColor="#DB2777" stopOpacity="0.5" />
+            <stop offset="100%" stopColor="#17132A" stopOpacity="0" />
           </radialGradient>
         </defs>
 
-        {/* Technical Frame & Matrix Grid */}
-        <rect x="20" y="20" width="800" height="560" rx="8" fill="#07101C" stroke="#17263A" strokeWidth="1" />
-        <rect x="20" y="20" width="800" height="560" rx="8" fill="url(#networkMapGrid)" />
+        {/* Technical Frame & Ambient Background */}
+        <rect x="20" y="20" width="800" height="560" rx="16" className="svg-card-bg" fill="#17132A" stroke="#2C2645" strokeWidth="1" />
 
         {/* Abstract Architectural Network Contours */}
         <path
           d="M 420 70 L 510 130 L 540 210 L 520 280 L 570 320 L 510 490 L 440 540 L 370 470 L 310 320 L 260 250 L 320 150 Z"
-          stroke="#17263A"
+          stroke="#2C2645"
           strokeWidth="1.2"
           strokeDasharray="4 6"
           strokeOpacity="0.6"
-          fill="#030507"
+          className="svg-inner-box"
+          fill="#0E0B1A"
           fillOpacity="0.75"
         />
-
-        {/* Latitudinal & Longitudinal Tech Grid lines */}
-        <line x1="20" y1="130" x2="820" y2="130" stroke="#17263A" strokeWidth="0.8" strokeDasharray="3 5" />
-        <line x1="20" y1="300" x2="820" y2="300" stroke="#17263A" strokeWidth="0.8" strokeDasharray="3 5" />
-        <line x1="20" y1="460" x2="820" y2="460" stroke="#17263A" strokeWidth="0.8" strokeDasharray="3 5" />
-        <line x1="420" y1="20" x2="420" y2="580" stroke="#17263A" strokeWidth="0.8" strokeDasharray="3 5" />
 
         {/* TRUNK ROUTE 1: DELHI (420, 130) <-> MUMBAI (300, 310) */}
         <path
           d="M 420 130 L 300 310"
-          stroke={selectedLocation === 'delhi' || selectedLocation === 'mumbai' ? '#245FA8' : '#17263A'}
+          stroke={selectedLocation === 'delhi' || selectedLocation === 'mumbai' ? '#DB2777' : '#2C2645'}
           strokeWidth={selectedLocation === 'delhi' || selectedLocation === 'mumbai' ? '3' : '1.5'}
           strokeLinecap="round"
           className="transition-all duration-300"
         />
         <path
           d="M 420 130 L 300 310"
-          stroke="#F5F7FA"
+          stroke="#DB2777"
           strokeWidth="1.5"
           strokeDasharray="4 10"
           className="animate-flow-dash"
@@ -66,14 +55,14 @@ export function IndiaNetworkMap({ selectedLocation, onSelectLocation }: IndiaNet
         {/* TRUNK ROUTE 2: MUMBAI (300, 310) <-> CHENNAI (480, 460) */}
         <path
           d="M 300 310 L 480 460"
-          stroke={selectedLocation === 'mumbai' || selectedLocation === 'chennai' ? '#245FA8' : '#17263A'}
+          stroke={selectedLocation === 'mumbai' || selectedLocation === 'chennai' ? '#DB2777' : '#2C2645'}
           strokeWidth={selectedLocation === 'mumbai' || selectedLocation === 'chennai' ? '3' : '1.5'}
           strokeLinecap="round"
           className="transition-all duration-300"
         />
         <path
           d="M 300 310 L 480 460"
-          stroke="#F5F7FA"
+          stroke="#DB2777"
           strokeWidth="1.5"
           strokeDasharray="4 10"
           className="animate-flow-dash"
@@ -82,14 +71,14 @@ export function IndiaNetworkMap({ selectedLocation, onSelectLocation }: IndiaNet
         {/* TRUNK ROUTE 3: CHENNAI (480, 460) <-> DELHI (420, 130) */}
         <path
           d="M 480 460 L 420 130"
-          stroke={selectedLocation === 'chennai' || selectedLocation === 'delhi' ? '#245FA8' : '#17263A'}
+          stroke={selectedLocation === 'chennai' || selectedLocation === 'delhi' ? '#DB2777' : '#2C2645'}
           strokeWidth={selectedLocation === 'chennai' || selectedLocation === 'delhi' ? '3' : '1.5'}
           strokeLinecap="round"
           className="transition-all duration-300"
         />
         <path
           d="M 480 460 L 420 130"
-          stroke="#F5F7FA"
+          stroke="#DB2777"
           strokeWidth="1.5"
           strokeDasharray="4 10"
           className="animate-flow-dash"
@@ -97,94 +86,109 @@ export function IndiaNetworkMap({ selectedLocation, onSelectLocation }: IndiaNet
 
         {/* EXTERNAL SUBSEA CABLE ROUTES */}
         {/* Mumbai to Marseille / Singapore Subsea Landing */}
-        <path d="M 300 310 L 120 360" stroke="#17263A" strokeWidth="1.5" strokeDasharray="3 3" />
-        <rect x="70" y="348" width="105" height="24" rx="4" fill="#07101C" stroke="#17263A" strokeWidth="1" />
-        <text x="122" y="364" fill="#A7B0BE" fontSize="9" fontFamily="Inter" textAnchor="middle" fontWeight="600">SMW-4 / AAE-1</text>
+        <path d="M 300 310 L 120 370" stroke="#DB2777" strokeWidth="1.2" strokeDasharray="3 6" className="animate-flow-dash" />
+        <text x="110" y="385" fill="#9C94B8" fontSize="9" fontFamily="Inter" textAnchor="end">SEA-ME-WE-5 / AAE-1</text>
 
         {/* Chennai to Singapore / APAC Subsea Landing */}
-        <path d="M 480 460 L 700 480" stroke="#17263A" strokeWidth="1.5" strokeDasharray="3 3" />
-        <rect x="650" y="468" width="110" height="24" rx="4" fill="#07101C" stroke="#17263A" strokeWidth="1" />
-        <text x="705" y="484" fill="#A7B0BE" fontSize="9" fontFamily="Inter" textAnchor="middle" fontWeight="600">BBG / SEA-ME-WE-5</text>
+        <path d="M 480 460 L 680 500" stroke="#DB2777" strokeWidth="1.2" strokeDasharray="3 6" className="animate-flow-dash" />
+        <text x="690" y="515" fill="#9C94B8" fontSize="9" fontFamily="Inter">Bay of Bengal Gateway (BBG)</text>
 
-        {/* NODE 1: DELHI (420, 130) */}
+        {/* LATENCY CALLOUT CHIPS ON INTERCONNECT LINES */}
+        {/* Delhi <-> Mumbai Latency */}
+        <g transform="translate(340, 205)">
+          <rect x="-35" y="-12" width="70" height="24" rx="4" className="svg-latency-bg" fill="#17132A" stroke="#2C2645" strokeWidth="1" />
+          <text x="0" y="4" className="svg-latency-text" fill="#DB2777" fontSize="10" fontFamily="Space Grotesk" fontWeight="700" textAnchor="middle">18.4 ms</text>
+        </g>
+
+        {/* Mumbai <-> Chennai Latency */}
+        <g transform="translate(390, 395)">
+          <rect x="-35" y="-12" width="70" height="24" rx="4" className="svg-latency-bg" fill="#17132A" stroke="#2C2645" strokeWidth="1" />
+          <text x="0" y="4" className="svg-latency-text" fill="#DB2777" fontSize="10" fontFamily="Space Grotesk" fontWeight="700" textAnchor="middle">14.1 ms</text>
+        </g>
+
+        {/* Delhi <-> Chennai Latency */}
+        <g transform="translate(470, 285)">
+          <rect x="-35" y="-12" width="70" height="24" rx="4" className="svg-latency-bg" fill="#17132A" stroke="#2C2645" strokeWidth="1" />
+          <text x="0" y="4" className="svg-latency-text" fill="#DB2777" fontSize="10" fontFamily="Space Grotesk" fontWeight="700" textAnchor="middle">24.2 ms</text>
+        </g>
+
+        {/* NODE 1: DELHI NCR (YOTTA D1) */}
         <g
           transform="translate(420, 130)"
-          className="cursor-pointer group"
           onClick={() => onSelectLocation('delhi')}
+          className="cursor-pointer group"
         >
           {selectedLocation === 'delhi' && (
-            <circle cx="0" cy="0" r="38" fill="url(#nodeActiveGlow)" className="animate-pulse" />
+            <circle cx="0" cy="0" r="32" fill="url(#nodeActiveGlow)" className="animate-pulse" />
           )}
-          <circle cx="0" cy="0" r="22" fill="#07101C" stroke={selectedLocation === 'delhi' ? '#245FA8' : '#17263A'} strokeWidth="2" />
-          <circle cx="0" cy="0" r="9" fill={selectedLocation === 'delhi' ? '#245FA8' : '#A7B0BE'} />
-          <circle cx="0" cy="0" r="3" fill="#030507" />
-
-          {/* Label Card */}
-          <g transform="translate(30, -22)">
-            <rect x="0" y="0" width="165" height="52" rx="4" fill="#07101C" stroke={selectedLocation === 'delhi' ? '#245FA8' : '#17263A'} strokeWidth="1.5" />
-            <text x="12" y="18" fill="#F5F7FA" fontSize="13" fontWeight="700" fontFamily="Space Grotesk">DELHI NCR</text>
-            <text x="12" y="32" fill="#A7B0BE" fontSize="10" fontFamily="Inter">Yotta D1 • 7th Floor</text>
-            <text x="12" y="44" fill="#245FA8" fontSize="9" fontWeight="600" fontFamily="Inter">PRIMARY TRANSIT HUB</text>
+          <circle cx="0" cy="0" r="16" className="svg-card-bg" fill="#17132A" stroke={selectedLocation === 'delhi' ? '#DB2777' : '#2C2645'} strokeWidth="2" />
+          <circle cx="0" cy="0" r="6" fill="#DB2777" />
+          
+          {/* Delhi Tag */}
+          <g transform="translate(24, -20)">
+            <rect x="0" y="0" width="170" height="48" rx="6" className="svg-tag-bg" fill="#0E0B1A" stroke={selectedLocation === 'delhi' ? '#DB2777' : '#2C2645'} strokeWidth="1.5" />
+            <text x="12" y="18" className="svg-text-primary" fill="#F5F3FA" fontSize="11" fontFamily="Space Grotesk" fontWeight="700">DELHI NCR</text>
+            <text x="12" y="32" className="svg-text-secondary" fill="#9C94B8" fontSize="9" fontFamily="Inter">Yotta D1 • 7th Floor Data Suite</text>
+            <circle cx="152" cy="14" r="3" fill="#DB2777" />
           </g>
         </g>
 
-        {/* NODE 2: MUMBAI (300, 310) */}
+        {/* NODE 2: MUMBAI (CONNECT IX) */}
         <g
           transform="translate(300, 310)"
-          className="cursor-pointer group"
           onClick={() => onSelectLocation('mumbai')}
+          className="cursor-pointer group"
         >
           {selectedLocation === 'mumbai' && (
-            <circle cx="0" cy="0" r="38" fill="url(#nodeActiveGlow)" className="animate-pulse" />
+            <circle cx="0" cy="0" r="32" fill="url(#nodeActiveGlow)" className="animate-pulse" />
           )}
-          <circle cx="0" cy="0" r="22" fill="#07101C" stroke={selectedLocation === 'mumbai' ? '#245FA8' : '#17263A'} strokeWidth="2" />
-          <circle cx="0" cy="0" r="9" fill={selectedLocation === 'mumbai' ? '#245FA8' : '#A7B0BE'} />
-          <circle cx="0" cy="0" r="3" fill="#030507" />
+          <circle cx="0" cy="0" r="16" className="svg-card-bg" fill="#17132A" stroke={selectedLocation === 'mumbai' ? '#DB2777' : '#2C2645'} strokeWidth="2" />
+          <circle cx="0" cy="0" r="6" fill="#DB2777" />
 
-          {/* Label Card */}
-          <g transform="translate(-185, -22)">
-            <rect x="0" y="0" width="170" height="52" rx="4" fill="#07101C" stroke={selectedLocation === 'mumbai' ? '#245FA8' : '#17263A'} strokeWidth="1.5" />
-            <text x="12" y="18" fill="#F5F7FA" fontSize="13" fontWeight="700" fontFamily="Space Grotesk">MUMBAI</text>
-            <text x="12" y="32" fill="#A7B0BE" fontSize="10" fontFamily="Inter">Connect IX Gateway</text>
-            <text x="12" y="44" fill="#245FA8" fontSize="9" fontWeight="600" fontFamily="Inter">SUBSEA INTERCONNECT</text>
+          {/* Mumbai Tag */}
+          <g transform="translate(-190, -20)">
+            <rect x="0" y="0" width="175" height="48" rx="6" className="svg-tag-bg" fill="#0E0B1A" stroke={selectedLocation === 'mumbai' ? '#DB2777' : '#2C2645'} strokeWidth="1.5" />
+            <text x="12" y="18" className="svg-text-primary" fill="#F5F3FA" fontSize="11" fontFamily="Space Grotesk" fontWeight="700">MUMBAI GATEWAY</text>
+            <text x="12" y="32" className="svg-text-secondary" fill="#9C94B8" fontSize="9" fontFamily="Inter">Connect IX • Subsea Landing</text>
+            <circle cx="157" cy="14" r="3" fill="#DB2777" />
           </g>
         </g>
 
-        {/* NODE 3: CHENNAI (480, 460) */}
+        {/* NODE 3: CHENNAI (CONNECT IX) */}
         <g
           transform="translate(480, 460)"
-          className="cursor-pointer group"
           onClick={() => onSelectLocation('chennai')}
+          className="cursor-pointer group"
         >
           {selectedLocation === 'chennai' && (
-            <circle cx="0" cy="0" r="38" fill="url(#nodeActiveGlow)" className="animate-pulse" />
+            <circle cx="0" cy="0" r="32" fill="url(#nodeActiveGlow)" className="animate-pulse" />
           )}
-          <circle cx="0" cy="0" r="22" fill="#07101C" stroke={selectedLocation === 'chennai' ? '#245FA8' : '#17263A'} strokeWidth="2" />
-          <circle cx="0" cy="0" r="9" fill={selectedLocation === 'chennai' ? '#245FA8' : '#A7B0BE'} />
-          <circle cx="0" cy="0" r="3" fill="#030507" />
+          <circle cx="0" cy="0" r="16" className="svg-card-bg" fill="#17132A" stroke={selectedLocation === 'chennai' ? '#DB2777' : '#2C2645'} strokeWidth="2" />
+          <circle cx="0" cy="0" r="6" fill="#DB2777" />
 
-          {/* Label Card */}
-          <g transform="translate(30, -22)">
-            <rect x="0" y="0" width="170" height="52" rx="4" fill="#07101C" stroke={selectedLocation === 'chennai' ? '#245FA8' : '#17263A'} strokeWidth="1.5" />
-            <text x="12" y="18" fill="#F5F7FA" fontSize="13" fontWeight="700" fontFamily="Space Grotesk">CHENNAI</text>
-            <text x="12" y="32" fill="#A7B0BE" fontSize="10" fontFamily="Inter">Connect IX Gateway</text>
-            <text x="12" y="44" fill="#245FA8" fontSize="9" fontWeight="600" fontFamily="Inter">SOUTHEAST ASIA LINK</text>
+          {/* Chennai Tag */}
+          <g transform="translate(24, -20)">
+            <rect x="0" y="0" width="180" height="48" rx="6" className="svg-tag-bg" fill="#0E0B1A" stroke={selectedLocation === 'chennai' ? '#DB2777' : '#2C2645'} strokeWidth="1.5" />
+            <text x="12" y="18" className="svg-text-primary" fill="#F5F3FA" fontSize="11" fontFamily="Space Grotesk" fontWeight="700">CHENNAI CORRIDOR</text>
+            <text x="12" y="32" className="svg-text-secondary" fill="#9C94B8" fontSize="9" fontFamily="Inter">Connect IX • Bay of Bengal Landing</text>
+            <circle cx="162" cy="14" r="3" fill="#DB2777" />
           </g>
         </g>
 
-        {/* Top/Bottom Telemetry Readouts */}
-        <g transform="translate(40, 50)">
-          <rect x="0" y="0" width="180" height="28" rx="4" fill="#030507" stroke="#17263A" strokeWidth="1" />
-          <text x="10" y="18" fill="#A7B0BE" fontSize="10" fontFamily="Inter" letterSpacing="0.5">
-            BGP ANYCAST: <tspan fill="#245FA8" fontWeight="700">OPTIMAL</tspan>
-          </text>
-        </g>
-
-        <g transform="translate(620, 50)">
-          <rect x="0" y="0" width="180" height="28" rx="4" fill="#030507" stroke="#17263A" strokeWidth="1" />
-          <text x="10" y="18" fill="#A7B0BE" fontSize="10" fontFamily="Inter" letterSpacing="0.5">
-            CORE UPTIME: <tspan fill="#245FA8" fontWeight="700">100.00%</tspan>
-          </text>
+        {/* TECHNICAL OVERLAY LEGEND */}
+        <g transform="translate(45, 490)">
+          <rect x="0" y="0" width="220" height="60" rx="6" className="svg-inner-box" fill="#0E0B1A" stroke="#2C2645" strokeWidth="1" />
+          <text x="12" y="18" fill="#DB2777" fontSize="9" fontFamily="Space Grotesk" fontWeight="700" letterSpacing="1">AXTRO CORE TOPOLOGY</text>
+          
+          <g transform="translate(12, 28)">
+            <line x1="0" y1="5" x2="20" y2="5" stroke="#DB2777" strokeWidth="2" />
+            <text x="28" y="9" className="svg-text-secondary" fill="#9C94B8" fontSize="9" fontFamily="Inter">100 Gbps Core Trunk</text>
+          </g>
+          
+          <g transform="translate(12, 44)">
+            <line x1="0" y1="5" x2="20" y2="5" stroke="#2C2645" strokeWidth="1.5" strokeDasharray="3 3" className="svg-border" />
+            <text x="28" y="9" className="svg-text-secondary" fill="#9C94B8" fontSize="9" fontFamily="Inter">Subsea Transit Corridors</text>
+          </g>
         </g>
       </svg>
     </div>

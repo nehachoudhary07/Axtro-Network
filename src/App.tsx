@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { PageRoute } from './types';
 import { ThemeProvider } from './context/ThemeContext';
+import { MotionProvider } from './components/motion/MotionProvider';
+import { CustomCursor } from './components/motion/CustomCursor';
+import { Preloader } from './components/motion/Preloader';
 import { Navigation } from './components/Navigation';
 import { Footer } from './components/Footer';
 
@@ -15,14 +18,14 @@ import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
 
 const pageTitles: Record<PageRoute, string> = {
-  '/': 'AXTRO NETWORK — The Axis of the Internet',
-  '/services/ddos-protection': 'DDoS Protection | AXTRO NETWORK',
-  '/services/ip-transit': 'IP Transit | AXTRO NETWORK',
-  '/services/ix-connectivity': 'IX Connectivity | AXTRO NETWORK',
-  '/services/leased-lines': 'Leased Lines | AXTRO NETWORK',
-  '/network': 'Network & Locations | AXTRO NETWORK',
-  '/about': 'About AXTRO NETWORK',
-  '/contact': 'Get Connected | AXTRO NETWORK',
+  '/': 'AXTRO NETWORKS — The Axis of Internet',
+  '/services/ddos-protection': 'DDoS Protection | AXTRO NETWORKS',
+  '/services/ip-transit': 'IP Transit | AXTRO NETWORKS',
+  '/services/ix-connectivity': 'IX Connectivity | AXTRO NETWORKS',
+  '/services/leased-lines': 'Leased Lines | AXTRO NETWORKS',
+  '/network': 'Network & Locations | AXTRO NETWORKS',
+  '/about': 'About AXTRO NETWORKS',
+  '/contact': 'Get Connected | AXTRO NETWORKS',
 };
 
 export default function App() {
@@ -38,7 +41,7 @@ export default function App() {
 
   useEffect(() => {
     // Update document title dynamically
-    document.title = pageTitles[currentRoute] || 'AXTRO NETWORK — The Axis of the Internet';
+    document.title = pageTitles[currentRoute] || 'AXTRO NETWORKS — The Axis of Internet';
 
     const handlePopState = () => {
       const path = window.location.pathname as PageRoute;
@@ -91,18 +94,26 @@ export default function App() {
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen flex flex-col bg-[#030507] text-[#F5F7FA] font-['Inter',sans-serif] selection:bg-[#164B8C] selection:text-white transition-colors duration-200">
-        {/* Sticky Global Navigation */}
-        <Navigation currentRoute={currentRoute} navigate={navigate} />
+      <MotionProvider>
+        {/* Fast High-Tech Preloader Sequence */}
+        <Preloader />
 
-        {/* Main Page Content */}
-        <main className="flex-1">
-          {renderPage()}
-        </main>
+        {/* Desktop Dynamic Custom Cursor */}
+        <CustomCursor />
 
-        {/* Global Footer */}
-        <Footer navigate={navigate} />
-      </div>
+        <div className="min-h-screen flex flex-col bg-[var(--bg-primary)] text-[var(--text-primary)] font-['Inter',sans-serif] selection:bg-[#DB2777] selection:text-white transition-colors duration-200">
+          {/* Sticky Global Navigation */}
+          <Navigation currentRoute={currentRoute} navigate={navigate} />
+
+          {/* Main Page Content */}
+          <main className="flex-1">
+            {renderPage()}
+          </main>
+
+          {/* Global Footer */}
+          <Footer navigate={navigate} />
+        </div>
+      </MotionProvider>
     </ThemeProvider>
   );
 }

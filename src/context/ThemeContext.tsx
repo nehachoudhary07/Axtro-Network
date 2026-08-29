@@ -25,9 +25,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     return 'dark';
   });
 
-  useEffect(() => {
+  const applyThemeClasses = (t: Theme) => {
     const root = document.documentElement;
-    if (theme === 'light') {
+    if (t === 'light') {
       root.classList.add('light');
       root.classList.remove('dark');
       root.setAttribute('data-theme', 'light');
@@ -40,15 +40,31 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       document.body.classList.add('dark');
       document.body.classList.remove('light');
     }
-    localStorage.setItem('axtro_theme', theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setThemeState((prev) => (prev === 'dark' ? 'light' : 'dark'));
   };
 
+  useEffect(() => {
+    applyThemeClasses(theme);
+    try {
+      localStorage.setItem('axtro_theme', theme);
+    } catch (e) {}
+  }, [theme]);
+
   const setTheme = (newTheme: Theme) => {
-    setThemeState(newTheme);
+    if (newTheme === theme) return;
+    const doc = document as any;
+    if (typeof window !== 'undefined' && doc.startViewTransition) {
+      doc.startViewTransition(() => {
+        setThemeState(newTheme);
+        applyThemeClasses(newTheme);
+      });
+    } else {
+      setThemeState(newTheme);
+    }
+  };
+
+  const toggleTheme = () => {
+    const nextTheme: Theme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(nextTheme);
   };
 
   return (

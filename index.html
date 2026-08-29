@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="dark scroll-smooth">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,14 +8,32 @@
     <meta property="og:title" content="AXTRO NETWORKS — The Axis of Internet" />
     <meta property="og:description" content="Secure, resilient, and ultra-low latency network infrastructure built for businesses that cannot afford to go offline." />
     <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#08090C" />
     <meta name="twitter:card" content="summary_large_image" />
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('axtro_theme');
+          var isDark = saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          if (isDark) {
+            document.documentElement.classList.add('dark');
+            document.documentElement.classList.remove('light');
+            document.documentElement.setAttribute('data-theme', 'dark');
+          } else {
+            document.documentElement.classList.add('light');
+            document.documentElement.classList.remove('dark');
+            document.documentElement.setAttribute('data-theme', 'light');
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 120'><polygon points='48,16 66,28 55,62 48,16' fill='%232E083B'/><polygon points='48,16 57,18 47,56 36,54' fill='%237E22CE'/><polygon points='35,62 47,64 34,114 16,114' fill='%23B83A91'/><polygon points='14,64 90,46 90,49 14,67' fill='%23FFFFFF'/><polygon points='55,62 66,28 89,114 66,114 56,70' fill='%23B83A91'/><circle cx='49' cy='15' r='7.5' fill='%23B83A91' stroke='%23FFFFFF' stroke-width='1.5'/></svg>" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
   </head>
-  <body class="bg-[#030507] text-[#F5F7FA] antialiased selection:bg-[#164B8C] selection:text-[#F5F7FA] font-['Inter',sans-serif]">
+  <body class="antialiased selection:bg-[#B83A91] selection:text-[#FFFFFF] font-['Inter',sans-serif]">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-

@@ -1,6 +1,7 @@
 import React from 'react';
 import { PageRoute } from '../types';
-import { ArrowRight, ShieldCheck, Zap, Headphones, Sparkles, Activity } from 'lucide-react';
+import { MagneticButton } from './motion/MagneticButton';
+import { ArrowRight, ShieldCheck, Zap, Headphones, Sparkles, Activity } from './animated-icons';
 
 interface FinalCtaSectionProps {
   navigate: (route: PageRoute) => void;
@@ -12,68 +13,66 @@ interface FinalCtaSectionProps {
 export function FinalCtaSection({
   navigate,
   title = 'CONNECT YOUR INFRASTRUCTURE TO THE AXIS TODAY.',
-  subtitle = 'Whether deploying 10G/100G IP transit, cross-connecting at Connect IX, or securing your network against volumetric DDoS attacks, our engineers are ready.',
+  subtitle = 'Whether deploying 10G/100G/400G IP transit, cross-connecting at Connect IX, or securing your network against volumetric DDoS attacks, our engineers are ready.',
   badgeText = 'READY FOR CARRIER-GRADE INTERCONNECTION?',
 }: FinalCtaSectionProps) {
   return (
-    <section id="final-cta-section" className="py-20 sm:py-28 relative overflow-hidden transition-colors">
+    <section id="final-cta-section" className="py-20 lg:py-28 relative overflow-hidden select-none">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="relative rounded-3xl overflow-hidden bg-[#07101C] border border-[#17263A] p-8 sm:p-12 lg:p-16 shadow-2xl">
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div className="lg:col-span-8 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#17263A] border border-[#17263A] text-[#245FA8] text-xs font-mono font-semibold uppercase tracking-wider">
+        <div className="relative rounded-3xl overflow-hidden bg-[#17132A] dark:bg-[#17132A] light:bg-white border border-[#2C2645] dark:border-[#2C2645] light:border-[#E2E5EA] p-6 sm:p-12 lg:p-16 shadow-2xl">
+          <div className="absolute inset-0 bg-modern-grid opacity-15 pointer-events-none" />
+
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
+            <div className="lg:col-span-8 space-y-4 sm:space-y-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1F1938] dark:bg-[#1F1938] light:bg-[#F0F2F5] border border-[#2C2645] dark:border-[#2C2645] light:border-[#E2E5EA] text-[#DB2777] text-[11px] sm:text-xs font-mono font-semibold uppercase tracking-wider">
                 <Sparkles size={13} />
                 {badgeText}
               </div>
 
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-[#F5F7FA] font-heading leading-tight whitespace-pre-line">
-                {title.includes('AXIS') ? (
-                  title
-                ) : (
-                  <span className="text-[#245FA8]">{title}</span>
-                )}
+              <h2 className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight text-[#F5F3FA] dark:text-[#F5F3FA] light:text-[#0F1115] font-heading leading-tight whitespace-pre-line">
+                {title}
               </h2>
 
-              <p className="text-base sm:text-lg text-[#A7B0BE] leading-relaxed max-w-2xl">
+              <p className="text-sm sm:text-lg text-[#9C94B8] dark:text-[#9C94B8] light:text-[#525866] leading-relaxed max-w-2xl">
                 {subtitle}
               </p>
 
-              {/* Guarantees Badges */}
+              {/* Verified Guarantees Badges */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
-                <div className="flex items-center gap-2.5 text-xs text-[#F5F7FA]">
-                  <ShieldCheck size={16} className="text-[#245FA8] shrink-0" />
-                  <span>99.999% SLA Uptime</span>
+                <div className="flex items-center gap-2.5 text-xs text-[#F5F3FA] dark:text-[#F5F3FA] light:text-[#0F1115]">
+                  <ShieldCheck size={16} className="text-[#DB2777] shrink-0" />
+                  <span>99.99% SLA Uptime</span>
                 </div>
-                <div className="flex items-center gap-2.5 text-xs text-[#F5F7FA]">
-                  <Zap size={16} className="text-[#245FA8] shrink-0" />
-                  <span>Sub-35ms Fast Provisioning</span>
+                <div className="flex items-center gap-2.5 text-xs text-[#F5F3FA] dark:text-[#F5F3FA] light:text-[#0F1115]">
+                  <Zap size={16} className="text-[#DB2777] shrink-0" />
+                  <span>Deterministic Latency</span>
                 </div>
-                <div className="flex items-center gap-2.5 text-xs text-[#F5F7FA]">
-                  <Headphones size={16} className="text-[#A7B0BE] shrink-0" />
+                <div className="flex items-center gap-2.5 text-xs text-[#F5F3FA] dark:text-[#F5F3FA] light:text-[#0F1115]">
+                  <Headphones size={16} className="text-[#DB2777] shrink-0" />
                   <span>24×7 Senior NOC Access</span>
                 </div>
               </div>
             </div>
 
-            {/* Right CTAs */}
-            <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-4">
-              <button
-                id="cta-get-connected-btn"
+            {/* Right Magnetic CTAs */}
+            <div className="lg:col-span-4 flex flex-col gap-4">
+              <MagneticButton
+                variant="primary"
                 onClick={() => navigate('/contact')}
-                className="w-full inline-flex items-center justify-center gap-2.5 px-8 py-4 text-xs font-bold uppercase tracking-wider text-white btn-primary-glow rounded-full shadow-xl"
+                className="w-full py-4 text-xs font-bold tracking-widest uppercase rounded-full shadow-2xl cursor-pointer"
               >
                 <span>REQUEST NOC PROPOSAL</span>
-                <ArrowRight size={15} />
-              </button>
+                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+              </MagneticButton>
 
-              <button
-                id="cta-explore-network-btn"
+              <MagneticButton
+                variant="glass"
                 onClick={() => navigate('/network')}
-                className="w-full inline-flex items-center justify-center gap-2.5 px-8 py-4 text-xs font-bold uppercase tracking-wider text-[#F5F7FA] btn-glass rounded-full"
+                className="w-full py-4 text-xs font-bold tracking-widest uppercase rounded-full cursor-pointer bg-[#1F1938] border-[#2C2645] text-[#F5F3FA] hover:border-[#DB2777]"
               >
-                <Activity size={15} className="text-[#245FA8]" />
+                <Activity size={14} className="text-[#DB2777]" />
                 <span>EXPLORE METRO POPS</span>
-              </button>
+              </MagneticButton>
             </div>
           </div>
         </div>

@@ -1,143 +1,141 @@
 import React from 'react';
 import { PageRoute } from '../types';
 import { LeasedLineDedicatedPath } from '../components/svg/LeasedLineDedicatedPath';
-import { LeasedLineIcon } from '../components/svg/ServiceIcons';
 import { FinalCtaSection } from '../components/FinalCtaSection';
-import { ArrowRight, Building, Server, Lock, Activity, Sparkles, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, Link as LinkIcon, CheckCircle2 } from '../components/animated-icons';
 
 interface LeasedLinesPageProps {
   navigate: (route: PageRoute) => void;
 }
 
 export function LeasedLinesPage({ navigate }: LeasedLinesPageProps) {
-  const useCases = [
+  const corridors = [
     {
-      title: 'Enterprise Metro Interconnect',
-      desc: 'Seamlessly link corporate headquarters, regional offices, and branch campuses with dedicated uncontended point-to-point bandwidth.',
-      icon: <Building className="w-6 h-6 text-[#245FA8]" />,
-      tag: 'Dedicated 1:1',
+      route: 'Delhi NCR ↔ Mumbai',
+      rtt: '18.4 ms',
+      tech: 'DWDM Optical Wavelength',
+      redundancy: 'Dual Ring Diverse Path',
+      desc: 'Express dark fiber conduit linking north-central enterprise financial hubs with ultra-low deterministic transit.',
+      tag: 'Express Corridor',
     },
     {
-      title: 'Data Center L2 Cross-Connects',
-      desc: 'High-bandwidth point-to-point Layer-2 circuits connecting server racks and colocation facilities across metro regions with zero packet drop.',
-      icon: <Server className="w-6 h-6 text-[#245FA8]" />,
-      tag: 'Metro Fiber',
+      route: 'Mumbai ↔ Chennai',
+      rtt: '14.1 ms',
+      tech: 'Subsea & Terrestrial Optical',
+      redundancy: 'Automatic Sub-50ms Protection',
+      desc: 'Cross-peninsula subsea and terrestrial dual-conduit path connecting west coast landing stations to Bay of Bengal.',
+      tag: 'Coastal Interconnect',
     },
     {
-      title: 'Ultra-Low Jitter Database Sync',
-      desc: 'Guaranteed deterministic latency and sub-millisecond jitter for real-time transactional databases, disaster recovery replication, and VoIP.',
-      icon: <Activity className="w-6 h-6 text-[#245FA8]" />,
-      tag: 'Zero Loss',
-    },
-    {
-      title: 'Air-Gapped Private Line Security',
-      desc: 'Dedicated optical circuits completely isolated from public Internet routing for strict regulatory data sovereignty and compliance.',
-      icon: <Lock className="w-6 h-6 text-[#245FA8]" />,
-      tag: 'Encrypted L2',
+      route: 'Delhi NCR ↔ Chennai',
+      rtt: '24.2 ms',
+      tech: 'Direct Express Dark Fiber',
+      redundancy: 'Sub-Wavelength Resiliency',
+      desc: 'Long-haul optical pipeline engineered for synchronous database replication, ERP clusters, and cloud disaster recovery.',
+      tag: 'North-South Trunk',
     },
   ];
 
   return (
-    <div className="w-full transition-colors relative overflow-hidden bg-[#030507]">
-      {/* HERO SECTION */}
-      <section id="leased-hero" className="pt-32 pb-20 md:pt-40 md:pb-28 relative overflow-hidden">
+    <div className="w-full transition-colors relative overflow-hidden bg-[#0E0B1A]">
+      {/* HERO SECTION WITH REAL-TIME DEDICATED OPTICAL TOPOLOGY */}
+      <section id="leased-hero" className="pt-28 pb-16 md:pt-36 md:pb-20 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-3xl space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#07101C] border border-[#17263A] text-[#245FA8] text-xs font-mono font-semibold uppercase tracking-wider">
-              <Lock size={14} />
-              DEDICATED OPTICAL CIRCUITS
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 xl:gap-12 items-center">
+            {/* Left Content Column */}
+            <div className="lg:col-span-5 space-y-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#17132A] border border-[#2C2645] text-[#DB2777] text-xs font-mono font-semibold uppercase tracking-wider">
+                <LinkIcon size={14} />
+                DEDICATED OPTICAL DARK FIBER
+              </div>
+
+              <h1 className="text-3xl sm:text-4xl xl:text-5xl font-black tracking-tight text-[#F5F3FA] font-heading leading-[1.15]">
+                PRIVATE OPTICAL LEASED LINES.<br />
+                <span className="text-[#DB2777]">ZERO PUBLIC INTERNET.</span>
+              </h1>
+
+              <p className="text-sm sm:text-base text-[#9C94B8] leading-relaxed">
+                Dedicated point-to-point optical wavelengths connecting enterprise data centers and headquarters across Delhi NCR, Mumbai, and Chennai with zero contention and zero jitter.
+              </p>
+
+              <div className="pt-2 flex flex-col sm:flex-row sm:items-center gap-4">
+                <button
+                  onClick={() => navigate('/contact')}
+                  className="inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3.5 sm:py-4 text-xs font-bold uppercase tracking-wider text-white btn-primary-glow rounded-full shadow-2xl cursor-pointer"
+                >
+                  <span>PROVISION PRIVATE LINE</span>
+                  <ArrowRight size={14} />
+                </button>
+
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#17132A] border border-[#2C2645] text-xs font-mono text-[#DB2777]">
+                  <span className="w-2 h-2 rounded-full bg-[#DB2777] animate-pulse"></span>
+                  <span>SUB-50MS DUAL-RING FAILOVER</span>
+                </div>
+              </div>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-[#F5F7FA] font-heading leading-tight">
-              LEASED LINES<br />
-              <span className="text-[#245FA8]">DEDICATED BY DESIGN.</span>
-            </h1>
-
-            <p className="text-base sm:text-lg text-[#A7B0BE] leading-relaxed max-w-2xl">
-              Dedicated point-to-point and multipoint optical connectivity for businesses requiring uncontended, zero-jitter network performance.
-            </p>
-
-            <div className="pt-4 flex flex-wrap items-center gap-4">
-              <button
-                onClick={() => navigate('/contact')}
-                className="inline-flex items-center gap-2.5 px-8 py-4 text-xs font-bold uppercase tracking-wider text-white btn-primary-glow rounded-full shadow-2xl"
-              >
-                <span>REQUEST CIRCUIT PROPOSAL</span>
-                <ArrowRight size={14} />
-              </button>
-
-              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#07101C] border border-[#17263A] text-xs font-mono text-[#245FA8]">
-                <span className="w-2 h-2 rounded-full bg-[#245FA8] animate-pulse"></span>
-                <span>99.999% SLA DEDICATED BANDWIDTH</span>
+            {/* Right Column: Dedicated Optical Path SVG Diagram */}
+            <div className="lg:col-span-7 w-full flex flex-col items-center justify-center">
+              <div className="w-full">
+                <LeasedLineDedicatedPath />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* SVG DEDICATED PATH DIAGRAM */}
-      <section id="leased-path-section" className="py-20 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-3xl mb-12">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#07101C] border border-[#17263A] text-[#245FA8] text-xs font-mono font-semibold uppercase tracking-wider mb-3">
-              <Activity size={13} />
-              POINT-TO-POINT CIRCUIT
+      {/* INTER-METRO CORRIDORS */}
+      <section className="py-20 border-t border-[#2C2645] bg-[#17132A]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1F1938] border border-[#2C2645] text-[#DB2777] text-xs font-mono font-semibold uppercase tracking-wider mb-3">
+              <CheckCircle2 size={13} />
+              LOW-LATENCY TRANSIT
             </div>
-            <h2 className="text-2xl sm:text-3xl font-black text-[#F5F7FA] font-heading">
-              UNCONTENDED OPTICAL PATHWAY
+            <h2 className="text-2xl sm:text-3xl font-black text-[#F5F3FA] font-heading">
+              Dedicated Inter-Metro Corridors
             </h2>
-            <p className="text-sm text-[#A7B0BE] mt-2">
-              Layer-2 transparent transport with carrier failover and guaranteed symmetrical throughput.
+            <p className="text-sm text-[#9C94B8] mt-2">
+              Contractually guaranteed latency standards engineered for real-time banking, ERP synchronization, and cloud storage replication.
             </p>
           </div>
 
-          <div className="bg-[#07101C] rounded-3xl p-4 sm:p-8 shadow-2xl border border-[#17263A]">
-            <LeasedLineDedicatedPath />
-          </div>
-        </div>
-      </section>
-
-      {/* USE CASES BENTO */}
-      <section id="leased-use-cases" className="py-24 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-3xl mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#07101C] border border-[#17263A] text-[#245FA8] text-xs font-mono font-semibold uppercase tracking-wider mb-3">
-              <Sparkles size={13} />
-              ENTERPRISE DEPLOYMENTS
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-black text-[#F5F7FA] font-heading">
-              ENGINEERED FOR CRITICAL WORKLOADS
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {useCases.map((uc) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {corridors.map((c) => (
               <div
-                key={uc.title}
-                className="bento-card p-8 flex flex-col justify-between group"
+                key={c.route}
+                className="bento-card p-6 sm:p-8 flex flex-col justify-between"
               >
                 <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="p-3 rounded-2xl bg-[#030507] border border-[#17263A] group-hover:scale-110 transition-transform">
-                      {uc.icon}
-                    </div>
-                    <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-[#030507] text-[#245FA8] border border-[#17263A]">
-                      {uc.tag}
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#1F1938] text-[#DB2777] border border-[#2C2645]">
+                      {c.tag}
+                    </span>
+                    <span className="text-[10px] font-mono text-[#9C94B8] uppercase">
+                      {c.tech}
                     </span>
                   </div>
 
-                  <h3 className="text-xl font-bold text-[#F5F7FA] font-heading mb-3">
-                    {uc.title}
+                  <h3 className="text-lg sm:text-xl font-bold font-heading text-[#F5F3FA] mb-4">
+                    {c.route}
                   </h3>
 
-                  <p className="text-sm text-[#A7B0BE] leading-relaxed">
-                    {uc.desc}
+                  <div className="p-4 rounded-2xl bg-[#0E0B1A] border border-[#2C2645] mb-4">
+                    <div className="text-[10px] font-mono text-[#9C94B8] uppercase">Guaranteed Max RTT</div>
+                    <div className="text-2xl sm:text-3xl font-black font-mono text-[#DB2777] mt-1">{c.rtt}</div>
+                  </div>
+
+                  <p className="text-xs text-[#9C94B8] leading-relaxed">
+                    {c.desc}
                   </p>
                 </div>
 
-                <div className="pt-6 mt-6 border-t border-[#17263A] flex items-center gap-2 text-xs text-[#245FA8] font-mono">
-                  <CheckCircle2 size={14} />
-                  <span>Unshared Dedicated Physical Port Allocation</span>
+                <div className="mt-6 pt-4 border-t border-[#2C2645] flex items-center justify-between text-xs font-mono">
+                  <span className="text-[#9C94B8]">{c.redundancy}</span>
+                  <div className="flex items-center gap-1 text-[#DB2777]">
+                    <CheckCircle2 size={13} />
+                    <span>1:1 Dedicated</span>
+                  </div>
                 </div>
               </div>
             ))}
@@ -145,12 +143,11 @@ export function LeasedLinesPage({ navigate }: LeasedLinesPageProps) {
         </div>
       </section>
 
-      {/* FINAL CTA */}
       <FinalCtaSection
         navigate={navigate}
-        title="DEPLOY YOUR PRIVATE FIBER."
-        subtitle="Provision dedicated point-to-point leased line circuits between your data centers and offices."
-        badgeText="CUSTOM CIRCUIT DEPLOYMENT"
+        title="PROVISION UNCONTENDED PRIVATE DARK FIBER TODAY."
+        subtitle="Connect with our optical engineering team for custom route diversity planning and fiber cross-connect specifications."
+        badgeText="PRIVATE LEASED LINE PROVISIONING"
       />
     </div>
   );
