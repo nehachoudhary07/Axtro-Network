@@ -22,14 +22,13 @@ export function TextReveal({
 
   useEffect(() => {
     if (typeof window === 'undefined' || !containerRef.current) return;
+    const element = containerRef.current;
 
     if (isReducedMotion) {
-      gsap.set(containerRef.current, { opacity: 1, y: 0, filter: 'blur(0px)' });
+      gsap.set(element, { opacity: 1, y: 0 });
       return;
     }
 
-    const element = containerRef.current;
-    
     // Check if element is already in viewport
     const rect = element.getBoundingClientRect();
     const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
@@ -37,19 +36,18 @@ export function TextReveal({
     if (!triggerOnScroll || isInViewport) {
       gsap.fromTo(
         element,
-        { y: 24, opacity: 0, filter: 'blur(6px)' },
+        { y: 16, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          filter: 'blur(0px)',
-          duration: 0.85,
+          duration: 0.6,
           delay,
           ease: 'power3.out',
           overwrite: 'auto',
         }
       );
     } else {
-      gsap.set(element, { y: 24, opacity: 0, filter: 'blur(6px)' });
+      gsap.set(element, { y: 16, opacity: 0 });
       ScrollTrigger.create({
         trigger: element,
         start: 'top 92%',
@@ -58,8 +56,7 @@ export function TextReveal({
           gsap.to(element, {
             y: 0,
             opacity: 1,
-            filter: 'blur(0px)',
-            duration: 0.85,
+            duration: 0.6,
             delay,
             ease: 'power3.out',
             overwrite: 'auto',

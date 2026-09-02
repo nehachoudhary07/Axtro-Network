@@ -30,7 +30,24 @@
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 120'><polygon points='48,16 66,28 55,62 48,16' fill='%232E083B'/><polygon points='48,16 57,18 47,56 36,54' fill='%237E22CE'/><polygon points='35,62 47,64 34,114 16,114' fill='%23B83A91'/><polygon points='14,64 90,46 90,49 14,67' fill='%23FFFFFF'/><polygon points='55,62 66,28 89,114 66,114 56,70' fill='%23B83A91'/><circle cx='49' cy='15' r='7.5' fill='%23B83A91' stroke='%23FFFFFF' stroke-width='1.5'/></svg>" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    
+    <!-- Preload critical hero LCP images (WebP format for ~75% bandwidth reduction) -->
+    <link rel="preload" as="image" href="/hero-globe-dark.webp" type="image/webp" fetchpriority="high" />
+    <link rel="preload" as="image" href="/hero-globe-light.webp" type="image/webp" fetchpriority="high" />
+
+    <!-- Google Fonts loaded asynchronously (non-render-blocking) -->
+    <link
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@600;700&display=swap"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@600;700&display=swap"
+      />
+    </noscript>
   </head>
   <body class="antialiased selection:bg-[#B83A91] selection:text-[#FFFFFF] font-['Inter',sans-serif]">
     <div id="root"></div>

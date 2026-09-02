@@ -51,8 +51,8 @@ export function Navigation({ currentRoute, navigate }: NavigationProps) {
 
       if (progressBarRef.current) {
         const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const progress = docHeight > 0 ? Math.min(Math.max((scrollY / docHeight) * 100, 0), 100) : 0;
-        progressBarRef.current.style.width = `${progress}%`;
+        const progress = docHeight > 0 ? Math.min(Math.max(scrollY / docHeight, 0), 1) : 0;
+        progressBarRef.current.style.transform = `scaleX(${progress})`;
       }
 
       tickingRef.current = false;
@@ -678,7 +678,7 @@ export function Navigation({ currentRoute, navigate }: NavigationProps) {
           <div className="absolute bottom-0 left-6 right-6 h-[2px] overflow-hidden rounded-full pointer-events-none">
             <div
               ref={progressBarRef}
-              className="h-full w-0 bg-[#DB2777] transition-[width] duration-75 ease-out shadow-[0_0_8px_#DB2777]"
+              className="h-full w-full bg-[#DB2777] origin-left scale-x-0 shadow-[0_0_8px_#DB2777]"
             />
           </div>
         </div>

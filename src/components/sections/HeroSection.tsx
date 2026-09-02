@@ -2,10 +2,7 @@ import React, { useRef } from 'react';
 import { PageRoute } from '../../types';
 import { useTheme } from '../../context/ThemeContext';
 import { MagneticButton } from '../motion/MagneticButton';
-import { TextReveal } from '../motion/TextReveal';
 import { ArrowRight } from '../animated-icons';
-import heroGlobeDarkImg from '../../assets/hero-globe-dark.jpg';
-import heroGlobeLightImg from '../../assets/hero-globe-light.jpg';
 
 interface HeroSectionProps {
   navigate: (route: PageRoute) => void;
@@ -20,20 +17,45 @@ export function HeroSection({ navigate }: HeroSectionProps) {
     <section
       ref={heroRef}
       id="hero-section"
-      className={`relative min-h-[100dvh] lg:min-h-screen flex flex-col justify-between pt-20 sm:pt-28 md:pt-32 pb-6 sm:pb-10 overflow-hidden select-none transition-colors duration-300 ${
+      className={`relative min-h-[100svh] lg:min-h-screen flex flex-col justify-between pt-20 sm:pt-28 md:pt-32 pb-6 sm:pb-10 overflow-hidden select-none transition-colors duration-300 ${
         isDark ? 'bg-[#06040A]' : 'bg-[#F5F3FA]'
       }`}
     >
-      {/* 1. Static Earth Globe Background Images (Exact user-provided assets for Dark & Light modes) */}
+      {/* 1. Static Earth Globe Background Images (WebP with JPEG fallback, dual-mounted for zero CLS crossfade) */}
       <div className="absolute inset-0 pointer-events-none z-0 flex items-center justify-center overflow-hidden">
-        {/* Dynamic Theme Earth Globe Image (Light / Dark) */}
-        <img
-          key={isDark ? 'dark-globe' : 'light-globe'}
-          src={isDark ? heroGlobeDarkImg : heroGlobeLightImg}
-          alt={isDark ? "AXTRO Global Network Infrastructure Earth Globe (Dark Theme)" : "AXTRO Global Network Infrastructure Earth Globe (Light Theme)"}
-          className="w-full h-full max-w-[1400px] xl:max-w-[1600px] 2xl:max-w-[1850px] object-cover sm:object-contain object-center sm:object-top opacity-90 sm:opacity-95 transition-opacity duration-500 transform translate-y-[2%] sm:translate-y-[-3%] md:translate-y-[-1%] scale-[1.04] sm:scale-100"
-          loading="eager"
-        />
+        {/* Dark Theme Globe */}
+        <picture className="absolute inset-0 flex items-center justify-center">
+          <source srcSet="/hero-globe-dark.webp" type="image/webp" />
+          <img
+            src="/hero-globe-dark.jpg"
+            alt="AXTRO Global Network Infrastructure Earth Globe (Dark Theme)"
+            width={1850}
+            height={1000}
+            fetchPriority="high"
+            decoding="async"
+            loading="eager"
+            className={`w-full h-full max-w-[1400px] xl:max-w-[1600px] 2xl:max-w-[1850px] object-cover sm:object-contain object-center sm:object-top transform translate-y-[2%] sm:translate-y-[-3%] md:translate-y-[-1%] scale-[1.04] sm:scale-100 transition-opacity duration-500 ${
+              isDark ? 'opacity-90 sm:opacity-95' : 'opacity-0'
+            }`}
+          />
+        </picture>
+
+        {/* Light Theme Globe */}
+        <picture className="absolute inset-0 flex items-center justify-center">
+          <source srcSet="/hero-globe-light.webp" type="image/webp" />
+          <img
+            src="/hero-globe-light.jpg"
+            alt="AXTRO Global Network Infrastructure Earth Globe (Light Theme)"
+            width={1850}
+            height={1000}
+            fetchPriority="high"
+            decoding="async"
+            loading="eager"
+            className={`w-full h-full max-w-[1400px] xl:max-w-[1600px] 2xl:max-w-[1850px] object-cover sm:object-contain object-center sm:object-top transform translate-y-[2%] sm:translate-y-[-3%] md:translate-y-[-1%] scale-[1.04] sm:scale-100 transition-opacity duration-500 ${
+              isDark ? 'opacity-0' : 'opacity-90 sm:opacity-95'
+            }`}
+          />
+        </picture>
 
         {/* Top ambient blend */}
         <div
@@ -61,18 +83,14 @@ export function HeroSection({ navigate }: HeroSectionProps) {
 
         {/* Display Headline */}
         <h1
-          key={`headline-${theme}`}
           className={`text-3xl sm:text-5xl md:text-6xl lg:text-[5.25rem] font-black tracking-tight font-heading leading-[1.1] sm:leading-[1.08] max-w-5xl drop-shadow-sm transition-colors duration-300 ${
             isDark ? 'text-[#F5F3FA]' : 'text-[#0F1115]'
           }`}
         >
-          <TextReveal delay={0.1}>
-            <span>Stronger Network.</span>
-          </TextReveal>
-          <TextReveal delay={0.25}>
-            <span>Stronger Tomorrow</span>
-            <span className="text-[#DB2777]">.</span>
-          </TextReveal>
+          <span>Stronger Network.</span>
+          <br className="hidden sm:inline" />
+          <span>Stronger Tomorrow</span>
+          <span className="text-[#DB2777]">.</span>
         </h1>
 
         {/* Subtitle */}
@@ -81,11 +99,9 @@ export function HeroSection({ navigate }: HeroSectionProps) {
             isDark ? 'text-[#9C94B8]' : 'text-[#525866]'
           }`}
         >
-          <TextReveal delay={0.4}>
-            <p>
-              High performance network infrastructure, DDoS protection, IP transit and IX connectivity for a fearless digital future.
-            </p>
-          </TextReveal>
+          <p>
+            High performance network infrastructure, DDoS protection, IP transit and IX connectivity for a fearless digital future.
+          </p>
         </div>
 
         {/* CTAs */}

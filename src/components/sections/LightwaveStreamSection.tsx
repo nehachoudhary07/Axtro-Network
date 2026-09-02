@@ -82,7 +82,7 @@ export function LightwaveStreamSection({ navigate }: LightwaveStreamSectionProps
     <section
       ref={sectionRef}
       id="lightwave-stream-section"
-      className="relative w-full min-h-[100dvh] sm:min-h-screen bg-[#0E0B1A] dark:bg-[#0E0B1A] light:bg-[#F6F7F9] overflow-hidden select-none flex flex-col justify-between items-center py-8 sm:py-14"
+      className="relative w-full min-h-[100svh] sm:min-h-screen bg-[#0E0B1A] dark:bg-[#0E0B1A] light:bg-[#F6F7F9] overflow-hidden select-none flex flex-col justify-between items-center py-8 sm:py-14"
     >
       {/* Background Ambient Radial Glow */}
       <div

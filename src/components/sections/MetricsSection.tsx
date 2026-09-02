@@ -45,23 +45,15 @@ export function MetricsSection() {
   ];
 
   const [counts, setCounts] = useState<{ [key: string]: number }>({
-    pops: 0,
-    capacity: 0,
-    sla: 0,
-    support: 0,
+    pops: 150,
+    capacity: 1.2,
+    sla: 99.99,
+    support: 24,
   });
 
   useGSAP(
     () => {
-      if (isReducedMotion || !containerRef.current) {
-        setCounts({
-          pops: 150,
-          capacity: 1.2,
-          sla: 99.99,
-          support: 24,
-        });
-        return;
-      }
+      if (isReducedMotion || !containerRef.current) return;
 
       const counterObj = { pops: 0, capacity: 0, sla: 90, support: 0 };
       let hasAnimated = false;
@@ -74,7 +66,7 @@ export function MetricsSection() {
           capacity: 1.2,
           sla: 99.99,
           support: 24,
-          duration: 1.6,
+          duration: 1.2,
           ease: 'power2.out',
           onUpdate: () => {
             setCounts({
@@ -93,11 +85,6 @@ export function MetricsSection() {
         once: true,
         onEnter: animateNumbers,
       });
-
-      const rect = containerRef.current.getBoundingClientRect();
-      if (rect.top < window.innerHeight && rect.bottom > 0) {
-        animateNumbers();
-      }
     },
     { scope: containerRef, dependencies: [isReducedMotion] }
   );

@@ -7,15 +7,25 @@ import { Preloader } from './components/motion/Preloader';
 import { Navigation } from './components/Navigation';
 import { Footer } from './components/Footer';
 
-// Pages
-import { HomePage } from './pages/HomePage';
-import { DDoSProtectionPage } from './pages/DDoSProtectionPage';
-import { IPTransitPage } from './pages/IPTransitPage';
-import { IXConnectivityPage } from './pages/IXConnectivityPage';
-import { LeasedLinesPage } from './pages/LeasedLinesPage';
-import { NetworkLocationsPage } from './pages/NetworkLocationsPage';
-import { AboutPage } from './pages/AboutPage';
-import { ContactPage } from './pages/ContactPage';
+import HomePage from './pages/HomePage';
+
+// Lazy loaded secondary pages for modular code-splitting
+const DDoSProtectionPage = React.lazy(() => import('./pages/DDoSProtectionPage'));
+const IPTransitPage = React.lazy(() => import('./pages/IPTransitPage'));
+const IXConnectivityPage = React.lazy(() => import('./pages/IXConnectivityPage'));
+const LeasedLinesPage = React.lazy(() => import('./pages/LeasedLinesPage'));
+const NetworkLocationsPage = React.lazy(() => import('./pages/NetworkLocationsPage'));
+const AboutPage = React.lazy(() => import('./pages/AboutPage'));
+const ContactPage = React.lazy(() => import('./pages/ContactPage'));
+
+// Fast route transition spinner placeholder
+function PageLoader() {
+  return (
+    <div className="min-h-[60vh] flex items-center justify-center">
+      <div className="w-8 h-8 rounded-full border-2 border-[#DB2777]/30 border-t-[#DB2777] animate-spin" />
+    </div>
+  );
+}
 
 const pageTitles: Record<PageRoute, string> = {
   '/': 'AXTRO NETWORKS — The Axis of Internet',
@@ -70,26 +80,34 @@ export default function App() {
   };
 
   const renderPage = () => {
-    switch (currentRoute) {
-      case '/':
-        return <HomePage navigate={navigate} />;
-      case '/services/ddos-protection':
-        return <DDoSProtectionPage navigate={navigate} />;
-      case '/services/ip-transit':
-        return <IPTransitPage navigate={navigate} />;
-      case '/services/ix-connectivity':
-        return <IXConnectivityPage navigate={navigate} />;
-      case '/services/leased-lines':
-        return <LeasedLinesPage navigate={navigate} />;
-      case '/network':
-        return <NetworkLocationsPage navigate={navigate} />;
-      case '/about':
-        return <AboutPage navigate={navigate} />;
-      case '/contact':
-        return <ContactPage navigate={navigate} />;
-      default:
-        return <HomePage navigate={navigate} />;
+    if (currentRoute === '/') {
+      return <HomePage navigate={navigate} />;
     }
+
+    return (
+      <React.Suspense fallback={<PageLoader />}>
+        {(() => {
+          switch (currentRoute) {
+            case '/services/ddos-protection':
+              return <DDoSProtectionPage navigate={navigate} />;
+            case '/services/ip-transit':
+              return <IPTransitPage navigate={navigate} />;
+            case '/services/ix-connectivity':
+              return <IXConnectivityPage navigate={navigate} />;
+            case '/services/leased-lines':
+              return <LeasedLinesPage navigate={navigate} />;
+            case '/network':
+              return <NetworkLocationsPage navigate={navigate} />;
+            case '/about':
+              return <AboutPage navigate={navigate} />;
+            case '/contact':
+              return <ContactPage navigate={navigate} />;
+            default:
+              return <HomePage navigate={navigate} />;
+          }
+        })()}
+      </React.Suspense>
+    );
   };
 
   return (
